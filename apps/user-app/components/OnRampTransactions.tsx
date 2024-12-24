@@ -1,5 +1,11 @@
 import { Card } from "@repo/ui/card"
 
+// enum status{
+//     success,
+//     failure,
+//     processing
+// }
+
 export const OnRampTransactions = ({
     transactions
 }: {
