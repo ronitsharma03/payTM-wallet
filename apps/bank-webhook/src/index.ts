@@ -54,9 +54,9 @@ app.post("/hdfcWebhook", async (req, res) => {
         message: "transaction already completed",
       });
     } else if (transaction.status == "Failure") {
-      console.log("Transaction failed");
+      console.log("Transaction already failed");
       return res.json({
-        message: "Transaction failed",
+        message: "Transaction already failed",
       });
     } else {
       await db.$transaction([
