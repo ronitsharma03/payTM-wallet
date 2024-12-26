@@ -1,10 +1,27 @@
-import express from "express";
+import express, { raw } from "express";
+import { z } from "zod";
 import db from "@repo/db/client";
 const app = express();
 
 app.use(express.json())
 
+
+
 app.post("/hdfcWebhook", async (req, res) => {
+
+    const inputPayload = z.object({
+        token: z.string(),
+        user_identifier: z.string(),
+        amount: z.string()
+    });
+
+    const { success } = inputPayload.safeParse(req.body);
+
+    if(!success){
+        return res.json({
+            message: "Wrong request"
+        });
+    }
     //TODO: Add zod validation here?
     //TODO: HDFC bank should ideally send us a secret so we know this is sent by them
     const paymentInformation: {
@@ -52,4 +69,6 @@ app.post("/hdfcWebhook", async (req, res) => {
 
 })
 
-app.listen(3003);
+app.listen(3003, () => {
+    console.log("Bank webhook is running on port 3003...");
+}); 

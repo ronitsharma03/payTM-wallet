@@ -2,12 +2,14 @@
 import { getServerSession } from "next-auth";
 import { authOptions } from "../auth";
 import prisma from "@repo/db/client";
+import { v1 as uuidv1 } from "uuid";
 
 export async function createOnRamptransaction(amount: number, provider: string){
     const session = await getServerSession(authOptions);
     const userId = session.user.id;
 
-    const token = Math.floor(Math.random()*100).toString();
+    // const token = Math.floor(Math.random()*100).toString();
+    const token = uuidv1();
     
     if(!userId){
         return {
