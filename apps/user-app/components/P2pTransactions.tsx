@@ -3,7 +3,7 @@ import { Card } from "@repo/ui/card";
 interface UserDetails {
     id: number;
     number: number;
-    // name: string;
+    name: string;
 }
 interface txnType {
   time: Date;

@@ -33,12 +33,12 @@ async function getP2pTransactions() {
     amount: t.amount,
     fromUser: {
       id: t.fromUserId,
-      name: t.fromUser.name,
+      name: String(t.fromUser.name),
       number: Number(t.fromUser.number),
     },
     toUser: {
       id: t.toUserId,
-      name: t.toUser.name,
+      name: String(t.toUser.name),
       number: Number(t.toUser.number),
     },
   }));
@@ -83,8 +83,7 @@ export default async function () {
           <div className="pt-4">
             <P2pTransactions
               transactions={transactions}
-              currentUser={Number(currentUserId)
-              }
+              currentUser={Number(currentUserId)}
             />
           </div>
         </div>
