@@ -27,6 +27,9 @@ export async function p2pTransfer(to: string, amount: number){
     }
 
     await prisma.$transaction(async (tx) => {
+        // this will ensure the locking in the specific row so that every request from same user is always processed sequentially !
+        await tx.$queryRaw`SELECT * FROM "User" WHERE id = ${Number(from)} FOR UPDATE`;
+
         const fromBalance = await tx.balance.findUnique({
             where: { userId: Number(from)}
         });
@@ -51,6 +54,15 @@ export async function p2pTransfer(to: string, amount: number){
             },
             data: {
                 amount: { increment: amount }
+            }
+        });
+
+        await tx.p2pTransactions.create({
+            data: {
+                fromUserId: Number(from),
+                toUserId: Number(toUser.id),
+                timestamp: new Date(),
+                amount: amount
             }
         });
         

@@ -15,6 +15,18 @@ model User {
   password          String
   OnRampTransaction OnRampTransaction[]
   Balance           Balance[]
+  SentTransfers     p2pTransactions[]   @relation(name: "FromUserRelation")
+  ReceivedTransfers p2pTransactions[]   @relation(name: "toUserRelation")
+}
+
+model p2pTransactions{
+  id Int @id @default(autoincrement())
+  amount Int 
+  timestamp DateTime
+  fromUserId Int
+  fromUser User @relation(name: "FromUserRelation", fields: [fromUserId], references: [id])
+  toUserId Int
+  toUser   User @relation(name: "toUserRelation", fields: [toUserId], references: [id])
 }
 
 model Merchant {
@@ -42,6 +54,7 @@ model Balance {
   locked Int
   user   User @relation(fields: [userId], references: [id])
 }
+
 
 enum AuthType {
   Google
