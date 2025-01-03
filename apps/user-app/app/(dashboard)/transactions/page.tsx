@@ -3,7 +3,7 @@ import { authOptions } from "../../lib/auth";
 import prisma from "@repo/db/client";
 import { BalanceCard } from "../../../components/BalanceCard";
 import { getBalance } from "../transfer/page";
-import { P2pTransactions, txnType } from "../../../components/P2pTransactions";
+import { P2pTransactions } from "../../../components/P2pTransactions";
 
 // interface txnType {
 //   time: Date;
@@ -42,7 +42,7 @@ async function getP2pTransactions() {
     },
   });
 
-  return txns.map((t): txnType => ({
+  return txns.map((t): any => ({
     time: t.timestamp,
     amount: t.amount,
     fromUser: {
