@@ -20,6 +20,10 @@ const SUPPORTED_BANKS = [
   {
     name: "State Bank Of India",
     redirectUrl: "https://www.onlinesbi.sbi/"
+  },
+  {
+    name: "ICICI Bank",
+    rediretUrl: "https://www.icicibank.com/personal-banking/insta-banking/internet-banking"
   }
 ];
 
