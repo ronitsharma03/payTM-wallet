@@ -3,8 +3,22 @@ import { authOptions } from "../../lib/auth";
 import prisma from "@repo/db/client";
 import { BalanceCard } from "../../../components/BalanceCard";
 import { getBalance } from "../transfer/page";
-import { P2pTransactions } from "../../../components/P2pTransactions";
+import { P2pTransactions, txnType } from "../../../components/P2pTransactions";
 
+// interface txnType {
+//   time: Date;
+//   amount: number;
+//   fromUser: {
+//     id: number;
+//     name: string | null;
+//     number: Number;
+//   };
+//   toUser: {
+//     id: number;
+//     name: string | null;
+//     number: Number;
+//   };
+// }
 async function getP2pTransactions() {
   const session = await getServerSession(authOptions);
   const userId = session?.user?.id;
@@ -28,17 +42,17 @@ async function getP2pTransactions() {
     },
   });
 
-  return txns.map((t) => ({
+  return txns.map((t): txnType => ({
     time: t.timestamp,
     amount: t.amount,
     fromUser: {
       id: t.fromUserId,
-      name: t.fromUser.name,
+      name: String(t.fromUser.name),
       number: Number(t.fromUser.number),
     },
     toUser: {
       id: t.toUserId,
-      name: t.toUser.name,
+      name: String(t.toUser.name),
       number: Number(t.toUser.number),
     },
   }));
@@ -83,8 +97,7 @@ export default async function () {
           <div className="pt-4">
             <P2pTransactions
               transactions={transactions}
-              currentUser={Number(currentUserId)
-              }
+              currentUser={Number(currentUserId)}
             />
           </div>
         </div>

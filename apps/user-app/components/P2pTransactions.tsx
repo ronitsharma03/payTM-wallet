@@ -3,9 +3,9 @@ import { Card } from "@repo/ui/card";
 interface UserDetails {
     id: number;
     number: number;
-    // name: string;
+    name: string;
 }
-interface txnType {
+export interface txnType {
   time: Date;
   amount: number;
   fromUser: UserDetails;
