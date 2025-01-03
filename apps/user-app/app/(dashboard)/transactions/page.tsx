@@ -44,6 +44,9 @@ async function getP2pTransactions() {
   }));
 }
 
+
+
+
 async function currentUser() {
   const session = await getServerSession(authOptions);
   const userDetails = await prisma.user.findUnique({
