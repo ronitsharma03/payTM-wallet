@@ -5,7 +5,7 @@ interface UserDetails {
     number: number;
     name: string;
 }
-export interface txnType {
+interface txnType {
   time: Date;
   amount: number;
   fromUser: UserDetails;

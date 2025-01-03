@@ -5,20 +5,6 @@ import { BalanceCard } from "../../../components/BalanceCard";
 import { getBalance } from "../transfer/page";
 import { P2pTransactions } from "../../../components/P2pTransactions";
 
-// interface txnType {
-//   time: Date;
-//   amount: number;
-//   fromUser: {
-//     id: number;
-//     name: string | null;
-//     number: Number;
-//   };
-//   toUser: {
-//     id: number;
-//     name: string | null;
-//     number: Number;
-//   };
-// }
 async function getP2pTransactions() {
   const session = await getServerSession(authOptions);
   const userId = session?.user?.id;
