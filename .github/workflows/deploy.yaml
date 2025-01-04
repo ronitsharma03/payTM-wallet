@@ -1,4 +1,4 @@
-name: Build and deploy to AWS EC2
+name: Build and deploy to Docker Hub
 
 
 on: 
